@@ -8,6 +8,7 @@ import {
   Delete,
   NotFoundException,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -18,6 +19,7 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 
@@ -33,14 +35,16 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiQuery({ name: 'name', required: false })
   @ApiOkResponse({ type: User, isArray: true })
   @Get()
-  findAll(): User[] {
-    return this.usersService.findAll();
+  findAll(@Query('name') name?: string): User[] {
+    return this.usersService.findAll(name);
   }
 
   @ApiOkResponse({ type: User })
   @ApiNotFoundResponse()
+  @ApiOkResponse({ type: User, description: 'Return User' })
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number): User {
     const user = this.usersService.findOne(id);
