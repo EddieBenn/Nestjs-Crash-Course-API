@@ -6,12 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Users')
 @Controller('users')
@@ -24,10 +30,11 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiQuery({ name: 'name', required: false })
   @ApiOkResponse({ type: User, isArray: true })
   @Get()
-  findAll(): User[] {
-    return this.usersService.findAll();
+  findAll(@Query('name') name?: string): User[] {
+    return this.usersService.findAll(name);
   }
 
   @ApiOkResponse({ type: User, description: 'Return User' })
