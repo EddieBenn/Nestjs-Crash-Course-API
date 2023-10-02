@@ -1,7 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsAlphanumeric, IsNotEmpty, MaxLength } from 'class-validator';
 export class CreateUserDto {
   @ApiProperty()
+  @IsAlphanumeric()
+  @MaxLength(10)
   @IsNotEmpty({
     message: 'Name is required',
   })
