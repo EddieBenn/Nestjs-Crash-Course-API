@@ -6,12 +6,19 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Users')
 @Controller('users')
@@ -31,9 +38,18 @@ export class UsersController {
   }
 
   @ApiOkResponse({ type: User })
+  @ApiNotFoundResponse()
   @Get(':id')
   findOne(@Param('id') id: string): User {
-    return this.usersService.findOne(+id);
+    const user = this.usersService.findOne(+id);
+    if (isNaN(+id)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    return user;
   }
 
   @ApiOkResponse({ type: User })
