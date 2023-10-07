@@ -42,7 +42,6 @@ export class UsersController {
     return this.usersService.findAll(name);
   }
 
-  @ApiOkResponse({ type: User })
   @ApiNotFoundResponse()
   @ApiOkResponse({ type: User, description: 'Return User' })
   @Get(':id')

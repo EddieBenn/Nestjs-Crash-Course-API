@@ -10,5 +10,5 @@ export class CreateUserDto {
   name: string;
 
   @ApiProperty({ required: false })
-  age?: number;
+  age?: string;
 }

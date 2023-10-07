@@ -6,9 +6,9 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
   private users: User[] = [
-    { id: 0, name: 'Benn' },
-    { id: 1, name: 'Eddie' },
-    { id: 2, name: 'Macc' },
+    { id: 0, name: 'Benn', age: '20' },
+    { id: 1, name: 'Eddie', age: '22' },
+    { id: 2, name: 'Macc', age: '24' },
   ];
 
   create(createUserDto: CreateUserDto): User {
