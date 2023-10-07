@@ -9,4 +9,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     message: 'Name is required',
   })
   name: string;
+
+  @ApiProperty({ required: false })
+  age?: string;
 }
