@@ -8,6 +8,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './users/entities/user.entity';
 import { PetsModule } from './pets/pets.module';
 import { Pet } from './pets/entities/pet.entity';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
