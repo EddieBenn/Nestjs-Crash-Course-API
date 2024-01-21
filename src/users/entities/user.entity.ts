@@ -15,6 +15,8 @@ export class User {
   @Column({ nullable: true })
   age?: string;
 
-  @OneToMany(() => Pet, (pet) => pet.owner)
+  @OneToMany(() => Pet, (pet) => pet.owner, {
+    eager: true,
+  })
   pets: Pet[];
 }
