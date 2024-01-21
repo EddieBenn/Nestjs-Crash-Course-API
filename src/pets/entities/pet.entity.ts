@@ -14,7 +14,6 @@ export class Pet {
 
   @Column()
   ownerId: string;
-
   @ManyToOne(() => User, (user) => user.pets)
   owner: User;
 }
