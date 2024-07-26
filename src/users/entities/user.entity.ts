@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Pet } from 'src/pets/entities/pet.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'users' })
 export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')

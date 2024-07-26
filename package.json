@@ -18,11 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migrate:create": "npm run typeorm -- migration:create ./src/migrations/$npm_config_name",
-    "migrate:gen": "npm run typeorm -- -d ./src/ormconfig.ts migration:generate ./src/migrations/$npm_config_name",
-    "migrate:run": "npm run typeorm -- -d ./src/ormconfig.ts migration:run",
-    "migrate:revert": "npm run typeorm -- -d ./src/ormconfig.ts migration:revert"
+    "migrate:gen": "npx typeorm-ts-node-commonjs migration:generate -d ./src/ormconfig.ts ./src/migrations/$npm_config_name",
+    "migrate:create": "typeorm migration:create ./src/migrations/$npm_config_name",
+    "migrate:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/ormconfig.ts",
+    "migrate:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/ormconfig.ts"
   },
   "dependencies": {
     "@golevelup/ts-jest": "^0.4.0",
